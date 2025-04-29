@@ -11,14 +11,15 @@ import javax.swing.JPanel;
 
 //GroundTile Is-a Tile
 public class GroundTile extends Tile{
-	
-	//Structure structures[];
-	
 
-	
-	public GroundTile() {
+	//Structure structures[];
+
+
+
+	public GroundTile() 
+	{
 		this.setBackground(new Color(144,238,144));
 
 	}
-	
+
 }

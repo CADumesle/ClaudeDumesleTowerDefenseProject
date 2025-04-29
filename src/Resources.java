@@ -14,18 +14,18 @@ import javax.swing.border.Border;
 
 public class Resources extends JPanel {
 	private Player player;
-	
+
 	public Resources(Player newPlayer)
 	{
 		player = newPlayer;
-		
+
 		this.setBackground(new Color(0,100,0));
 		setLayout(new FlowLayout());
 		Border blackline = BorderFactory.createLineBorder(Color.black);
 		setBorder(blackline);
-		
+
 		JLabel playerResources = new JLabel("Resources:");
 		add(playerResources);
 	}
-	
+
 }

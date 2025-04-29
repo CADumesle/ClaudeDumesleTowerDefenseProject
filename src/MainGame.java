@@ -9,9 +9,10 @@ import javax.swing.JFrame;
  */
  //MainGame Is-A JFrame
 public class MainGame extends JFrame {
-	
-	public MainGame() {
+	private TowerDefenseModel model;
+	public MainGame(TowerDefenseModel newModel) {
 		
+		model = newModel;
 		
 		setTitle("Tower Defense");
 		setLayout(new BorderLayout());
@@ -20,28 +21,29 @@ public class MainGame extends JFrame {
 		pack();
 		setVisible(true);
 		
-		//dont use yet
+		//don't use yet
 		Player player = new Player(10,10,0); // default materials for player
+		
 		
 		Resources resources = new Resources(player);
 		add(resources, BorderLayout.NORTH);
 		
-		Store store = new Store(player);
+		Store store = new Store(player, model);
 		add(store, BorderLayout.EAST);	
 		
-		TowerDefenseModel model = new TowerDefenseModel(this);
+		
 		add(model, BorderLayout.CENTER);
 		
-		Store filler = new Store(player);
+		Store filler = new Store(player, model);
 		add(filler, BorderLayout.WEST);
 		
 		pack();
 	}
 	
 
-	
 	public static void main(String[] args) {
-		new MainGame();
+		new MainGame(new TowerDefenseModel());
+
 	}
 	
 }
