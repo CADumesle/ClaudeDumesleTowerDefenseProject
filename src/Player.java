@@ -1,10 +1,16 @@
-/*
- * Author: Claude-Arthur Dumesle
- * 
- * version/date: 4/14/2025
- */
+/**
+* Lead Author(s): Claude-Arthur Dumesle
+*
+* Version: 5/5/2025
+*/
 
-public class Player {
+/**
+ * 
+ * Purpose: The reponsibility of Player is store user's current resources
+ *
+ */
+public class Player 
+{
 	//a player has wood
 	private int wood;
 	//a player has stone
@@ -21,4 +27,5 @@ public class Player {
 		stone = newStone;
 		diamond = newDiamond;
 	}
+	
 }

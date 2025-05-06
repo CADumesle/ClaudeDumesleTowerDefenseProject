@@ -1,8 +1,8 @@
-/*
- * Author: Claude-Arthur Dumesle
- * 
- * version/date: 4/14/2025
- */
+/**
+* Lead Author(s): Claude-Arthur Dumesle
+*
+* Version: 5/5/2025
+*/
 
 import java.awt.Color;
 import java.awt.FlowLayout;
@@ -16,11 +16,25 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.Border;
 
-public class Store extends JPanel {
+/**
+ * 
+ * Purpose: The reponsibility of Store is let user get or updrage structures in exchange of resources
+ *
+ * Store is-a JPanel
+ */
+public class Store extends JPanel 
+{
 	private Player player;
 	private TowerDefenseModel model;
 	
-	public Store(Player newPlayer, TowerDefenseModel newModel) {
+	/**
+	 * 
+	 * Purpose: Constructor that passes player and TowerDefenseModel reference to Store
+	 * @param newPlayer
+	 * @param newModel
+	 */
+	public Store(Player newPlayer, TowerDefenseModel newModel) 
+	{
 		
 		player = newPlayer;
 		model = newModel;
@@ -35,16 +49,30 @@ public class Store extends JPanel {
 		add(header);
 		
 		//placeholder Button to try defense
-		JButton button = new JButton("Buy");
-		button.addActionListener(new ActionListener() {
+		JButton	canonButton = new JButton("Buy Canon");
+		canonButton.addActionListener(new ActionListener() 
+		{
 			@Override
 			public void actionPerformed(ActionEvent e)
 			{
-				
+				model.setPlacingStructure(new Canon());
 				model.togglePlacingMode(); // activates placing mode
-				
 			}
 		});
-		add(button);
+		add(canonButton);
+		
+		//placeholder Button to try defense
+		JButton	lumberButton = new JButton("Buy LumbYards");
+		lumberButton.addActionListener(new ActionListener() 
+		{
+			@Override
+			public void actionPerformed(ActionEvent e)
+			{
+				model.setPlacingStructure(new LumberYard());
+				model.togglePlacingMode(); // activates placing mode
+			}
+		});
+		add(lumberButton);
+		
 	}
 }

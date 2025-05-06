@@ -1,9 +1,11 @@
-/*
- * Author: Claude-Arthur Dumesle
- * 
- * version/date: 4/14/2025
- */
+/**
+* Lead Author(s): Claude-Arthur Dumesle
+*
+* Version: 5/5/2025
+*/
 
+
+import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -15,20 +17,30 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-public class TowerDefenseModel extends JPanel{
+/**
+ * 
+ * Purpose: The reponsibility of TowerDefenseModel is to create a 2D map containing all ingame objects
+ *
+ * TowerDefenseModel is-a JPanel
+ */
+public class TowerDefenseModel extends JPanel
+{
 
 	private Tile[][] tiles = new Tile[9][9]; //TDM Has-Many tiles
 
-	PathTile nextTile = null; //TDM Has-A nextTile
+	private PathTile nextTile = null; //TDM Has-A nextTile
 
-	PathTile startPath; // TDM Has-A startPath
+	private PathTile startPath; // TDM Has-A startPath
 
-	Enemy enemy = new Enemy(); // TDM Has-A Enemy
+	private Enemy enemy = new Enemy(); // TDM Has-A Enemy
 	
-	boolean placingMode = false; // TDM HAS-A placing mode
+	private boolean placingMode = false; // TDM HAS-A placing mode
 
+	private Structure placingStructure;
 
-	MainGame window;
+	/*
+	 * Construct defense model
+	 */
 	public TowerDefenseModel()
 	{
 
@@ -45,8 +57,13 @@ public class TowerDefenseModel extends JPanel{
 	}
 
 
-	//manually create a course for the player
-	public void createMap() {
+
+	/**
+	 * 
+	 * Purpose: manually create a course for the player
+	 */
+	public void createMap() 
+	{
 		//create a 9x9 loop to traverse through grid
 		for (int i = 0; i < 9; i++)
 		{
@@ -83,7 +100,10 @@ public class TowerDefenseModel extends JPanel{
 		}
 	}
 	
-	
+	/**
+	 * 
+	 * Purpose: let player in and out of Placing mode
+	 */
 	public void togglePlacingMode()
 	{
 		if(placingMode)
@@ -96,23 +116,68 @@ public class TowerDefenseModel extends JPanel{
 		}
 	}
 	
+	/*
+	 * Purpose: check if in placing mode
+	 * @return: placingmode
+	 */
 	public boolean isPlacingMode() 
 	{
 		return placingMode;
 	}
-	//place structure in wanted row,col
-	public void placeStructure(int row, int col)
+	
+	/**
+	 * note: maybe change later to a queue.add and let player buy multiple at once
+	 * Purpose: keep structure bought stored
+	 * @param newStructure
+	 */
+	public void setPlacingStructure(Structure newStructure)
+	{
+		placingStructure = newStructure;
+	}
+
+	/**
+	 * 
+	 * Purpose: place structure in wanted row,col
+	 * @param row
+	 * @param col
+	 */
+	public void placeStructure(Structure newStructure, int row, int col)
 	{
 		Tile placeArea = tiles[row][col];
-		Canon canon = new Canon(this, row, col);
-		placeArea.add(canon);
+		
+		if(newStructure instanceof Canon)
+		{
+			Canon canon = new Canon(this, row, col);
+			placeArea.add(canon, BorderLayout.CENTER);
+		}
+		else
+		{
+			LumberYard lumberYard = new LumberYard(this,row,col);
+			placeArea.add(lumberYard, BorderLayout.CENTER);
+		}
+		
 		placeArea.revalidate();
 		placeArea.update(getGraphics());
 	}
 	
-	//return: 2d array of tiles tiles
-	public Tile[][] getMap(){
+	/**
+	 * 
+	 * Purpose: return structure being placed
+	 * @return placing structure
+	 */
+	public Structure getPlacingStructure()
+	{
+		return placingStructure;
+	}
+	
+	/**
+	 * 
+	 * @return model's 2d array
+	 */
+	public Tile[][] getMap()
+	{
 		
 		return tiles;
 	}
+	
 }

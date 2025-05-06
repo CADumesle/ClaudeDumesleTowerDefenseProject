@@ -1,16 +1,40 @@
+/**
+* Lead Author(s): Claude-Arthur Dumesle
+*
+* Version: 5/5/2025
+*/
+
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-public class MouseListener extends MouseAdapter{
+/**
+ * 
+ * Purpose: The reponsibility of MouseListener is listen on user mouseclicks/place structures on tiles if desired
+ *
+ * MouseListener is-a MouseAdapter
+ */
+
+public class MouseListener extends MouseAdapter
+{
 	TowerDefenseModel model; // MouseListener HAS-A model
 
+	/**
+	 * 
+	 * Purpose: Constructor for MouseListener
+	 * @param newModel
+	 */
 	public MouseListener(TowerDefenseModel newModel) {
 		super();//let parent handle construction
 		model = newModel;
 	}
-	//Listen when user clicks and get gridbox location of click
+	
+
+	/**
+	 * Purpose: Listen when user clicks and get gridbox location of click
+	 */
 	@Override
-	public void mouseClicked(MouseEvent e) {
+	public void mouseClicked(MouseEvent e) 
+	{
 		//divide the width of the TDM by its grdlayout dimensions(int 9 for now)
 		int cellWidth = model.getWidth()/9;
 		int cellHeight = model.getHeight()/9;
@@ -26,7 +50,7 @@ public class MouseListener extends MouseAdapter{
 
 		//if in placing mode place structure bought and toggle placing mode off
 		if(model.isPlacingMode()) {
-			model.placeStructure(row, col);
+			model.placeStructure(model.getPlacingStructure(), row, col);
 			model.togglePlacingMode();
 		}
 
