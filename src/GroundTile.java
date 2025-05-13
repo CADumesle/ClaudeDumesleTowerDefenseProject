@@ -33,4 +33,10 @@ public class GroundTile extends Tile
 		setLayout(new BorderLayout());
 	}
 
+	
+	@Override
+	public boolean isPlaceable()
+	{
+		return true;
+	}
 }

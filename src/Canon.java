@@ -1,7 +1,7 @@
 /**
 * Lead Author(s): Claude-Arthur Dumesle
 *
-* Version: 5/5/2025
+* Version: 5/12/2025
 */
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -27,14 +27,22 @@ public class Canon extends Structure implements Defense
 
 	private int range = 2;// A Canon HAS-A range
 	private int damage = 10; // A Canon HAS-A damage
-	private Queue<PathTile> atkArea = new LinkedList<PathTile>(); // A Canon HAS-MANY atkArea
+	private Queue<Tile> atkArea = new LinkedList<Tile>(); // A Canon HAS-MANY atkArea
 	
 
+	/**
+	 * 
+	 * Purpose: construct a canon obj that interacts in the map
+	 * @param newMap
+	 * @param newRow
+	 * @param newCol
+	 */
 	public Canon (TowerDefenseModel newMap, int newRow, int newCol) 
 	{
 		
 		super(newMap, newRow, newCol); //let parent handle references and paint
 
+	
 
 		scanMap();
 		timer = new Timer(1000, new ActionListener() 
@@ -70,7 +78,7 @@ public class Canon extends Structure implements Defense
 	 */
 	public void attack()
 	{
-		for(PathTile tile: atkArea)// traverse through the stack
+		for(Tile tile: atkArea)// traverse through the stack
 		{
 			
 			if(tile.getEnemy() != null)
@@ -97,11 +105,9 @@ public class Canon extends Structure implements Defense
 			{
 				for(int j = col - range; j <= row + range; j++)
 				{
-					if(map[i][j] instanceof PathTile)//only add Pathtiles into atkArea
-					{
-//						System.out.println("adding tile r: " + i + " c: " + j);
-						atkArea.add((PathTile) map[i][j]);
-					}
+
+					System.out.println("adding tile r: " + i + " c: " + j);
+					atkArea.add(map[i][j]);	
 				}
 			}
 		}
@@ -119,6 +125,17 @@ public class Canon extends Structure implements Defense
 	{
 		return getClass().getResource("/media/canon.png");
 	}
-
+	
+	/**
+	 * @param newMap
+	 * @param newRow
+	 * @param newCol
+	 * @return  a constructed canon
+	 */
+	public Canon reconstruct(TowerDefenseModel newMap, int newRow, int newCol)
+	{
+		return new Canon(newMap, newRow, newCol);
+	}
+	
 }
 

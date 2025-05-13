@@ -54,6 +54,7 @@ public class PathTile extends Tile
 	 * 
 	 * @return enemy on current enemy on tile
 	 */
+	@Override
 	public Enemy getEnemy()
 	{
 		return currentEnemy;
@@ -107,4 +108,5 @@ public class PathTile extends Tile
 
 		this.update(getGraphics());
 	}
+	
 }

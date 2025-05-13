@@ -1,7 +1,7 @@
 /**
 * Lead Author(s): Claude-Arthur Dumesle
 *
-* Version: 5/5/2025
+* Version: 5/12/2025
 */
 
 import java.awt.event.MouseAdapter;
@@ -35,9 +35,9 @@ public class MouseListener extends MouseAdapter
 	@Override
 	public void mouseClicked(MouseEvent e) 
 	{
-		//divide the width of the TDM by its grdlayout dimensions(int 9 for now)
-		int cellWidth = model.getWidth()/9;
-		int cellHeight = model.getHeight()/9;
+		//divide the width of the TDM by its grdlayout dimensions
+		int cellWidth = model.getWidth()/model.getDimension();
+		int cellHeight = model.getHeight()/model.getDimension();
 
 		//get x and y of click
 		int x = e.getX();

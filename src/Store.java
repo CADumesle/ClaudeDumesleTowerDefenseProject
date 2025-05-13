@@ -24,8 +24,8 @@ import javax.swing.border.Border;
  */
 public class Store extends JPanel 
 {
-	private Player player;
-	private TowerDefenseModel model;
+	private Player player; // Store HAS-A player
+	private TowerDefenseModel model; //Store HAS-A model
 	
 	/**
 	 * 

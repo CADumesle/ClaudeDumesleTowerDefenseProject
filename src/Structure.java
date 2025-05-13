@@ -30,7 +30,7 @@ public abstract class Structure extends JPanel
 	protected Tile[][] map; // A Structure HAS-A map
 	protected Timer timer; // A Structure HAS-A timer
 	
-	private BufferedImage image;
+	private BufferedImage image; // A Strucure HAS-A image
 	
 	/**
 	 * 
@@ -84,4 +84,11 @@ public abstract class Structure extends JPanel
 		return getClass().getResource("/media/structure.png");
 	}
     
+	/*
+	 * only used for inherited obj to reconstruct
+	 */
+	public Structure reconstruct (TowerDefenseModel newMap, int newRow, int newCol) {
+		return null;
+	}
+
 }

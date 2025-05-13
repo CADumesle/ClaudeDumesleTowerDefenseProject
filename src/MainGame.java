@@ -15,7 +15,7 @@ import javax.swing.JFrame;
 public class MainGame extends JFrame 
 {
 	private TowerDefenseModel model; // MainGame has a model
-	
+	private Player player;
 	/**
 	 * 
 	 * Purpose: Create a window of the TowerDefenseGame
@@ -25,6 +25,7 @@ public class MainGame extends JFrame
 	{
 		
 		model = newModel;
+		player = model.getPlayer();
 		
 		setTitle("Tower Defense");
 		setLayout(new BorderLayout());
@@ -32,9 +33,6 @@ public class MainGame extends JFrame
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		pack();
 		setVisible(true);
-		
-		//don't use yet
-		Player player = new Player(10,10,0); // default materials for player
 		
 		
 		Resources resources = new Resources(player);

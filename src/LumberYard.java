@@ -1,16 +1,47 @@
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.net.URL;
+
+import javax.swing.Timer;
 
 /**
 * Lead Author(s): Claude-Arthur Dumesle
 *
-* Version: 5/5/2025
+* Version: 5/12/2025
 */
 
 public class LumberYard extends Structure implements Productive
 {
+	private Player player; // LumberYard HAS-A player
+	
+	private int woodProductionRate = 1; // LumberYard HAS-A woodProductionRate
+	
+	/**
+	 * 
+	 * Purpose: create a LumberYard object that interacts with the map
+	 * @param newMap
+	 * @param newRow
+	 * @param newCol
+	 */
 	public LumberYard(TowerDefenseModel newMap, int newRow, int newCol)
 	{
-		super(newMap, newRow, newCol);
+		super(newMap, newRow, newCol); // let parent handle constructions
+		
+		player = newMap.getPlayer();
+		
+		timer = new Timer(1000, new ActionListener() 
+		{
+
+			//call attack every second
+			@Override 
+			public void actionPerformed(ActionEvent e) 
+			{
+				player.addWood(woodProductionRate);
+				
+			}
+		});
+
+		timer.start();
 	}
 	
 	
@@ -20,7 +51,7 @@ public class LumberYard extends Structure implements Productive
 	 */
 	public LumberYard()
 	{
-		// TODO Auto-generated constructor stub
+	
 	}
 
 
@@ -32,4 +63,13 @@ public class LumberYard extends Structure implements Productive
 	{
 		return getClass().getResource("/media/lumberyard.png");
 	}
+	
+	/**
+	 * @return a LumberYard constructed lumberyard obj
+	 */
+	public LumberYard reconstruct(TowerDefenseModel newMap, int newRow, int newCol)
+	{
+		return new LumberYard(newMap, newRow, newCol);
+	}
+	
 }

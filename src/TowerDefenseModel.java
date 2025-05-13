@@ -1,7 +1,7 @@
 /**
 * Lead Author(s): Claude-Arthur Dumesle
 *
-* Version: 5/5/2025
+* Version: 5/12/2025
 */
 
 
@@ -26,7 +26,11 @@ import javax.swing.JPanel;
 public class TowerDefenseModel extends JPanel
 {
 
-	private Tile[][] tiles = new Tile[9][9]; //TDM Has-Many tiles
+	private Player player = new Player(10,0,0); // TMD HAS-A Player
+	
+	private static final int DIMENSION = 9; // TDM HAS-A DIMENSION
+	
+	private Tile[][] tiles = new Tile[DIMENSION][DIMENSION]; //TDM Has-Many tiles
 
 	private PathTile nextTile = null; //TDM Has-A nextTile
 
@@ -36,15 +40,16 @@ public class TowerDefenseModel extends JPanel
 	
 	private boolean placingMode = false; // TDM HAS-A placing mode
 
-	private Structure placingStructure;
+	private Structure placingStructure; // TDM HAS-A placing Strucure
 
 	/*
 	 * Construct defense model
 	 */
 	public TowerDefenseModel()
 	{
-
-		setLayout(new GridLayout(9,9));
+		
+		
+		setLayout(new GridLayout(DIMENSION,DIMENSION));
 		createMap();
 
 		startPath.spawn(enemy);
@@ -64,11 +69,11 @@ public class TowerDefenseModel extends JPanel
 	 */
 	public void createMap() 
 	{
-		//create a 9x9 loop to traverse through grid
-		for (int i = 0; i < 9; i++)
+		//create a loop to traverse through grid
+		for (int i = 0; i < DIMENSION; i++)
 		{
 
-			for(int k = 0; k <9; k++)
+			for(int k = 0; k <DIMENSION; k++)
 			{
 				/////////// make the the last center Tile of the grid a startPath
 				//eEnemis traverse from bottom to top
@@ -94,9 +99,7 @@ public class TowerDefenseModel extends JPanel
 					add(ground);
 					tiles[i][k] = ground;
 				}
-
 			}
-
 		}
 	}
 	
@@ -145,16 +148,8 @@ public class TowerDefenseModel extends JPanel
 	{
 		Tile placeArea = tiles[row][col];
 		
-		if(newStructure instanceof Canon)
-		{
-			Canon canon = new Canon(this, row, col);
-			placeArea.add(canon, BorderLayout.CENTER);
-		}
-		else
-		{
-			LumberYard lumberYard = new LumberYard(this,row,col);
-			placeArea.add(lumberYard, BorderLayout.CENTER);
-		}
+		
+		placeArea.add(newStructure.reconstruct(this, row, col), BorderLayout.CENTER);
 		
 		placeArea.revalidate();
 		placeArea.update(getGraphics());
@@ -179,5 +174,17 @@ public class TowerDefenseModel extends JPanel
 		
 		return tiles;
 	}
+	/**
+	 * 
+	 * @return DIMENSION
+	 */
+	public int getDimension()
+	{
+		return DIMENSION;
+	}
 	
+	public Player getPlayer()
+	{
+		return player;
+	}
 }

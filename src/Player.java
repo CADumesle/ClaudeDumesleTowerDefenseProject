@@ -28,4 +28,14 @@ public class Player
 		diamond = newDiamond;
 	}
 	
+	
+	public int getWood()
+	{
+		return wood;
+	}
+	
+	public void addWood(int newWood)
+	{
+		wood += newWood;
+	}
 }
