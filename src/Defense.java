@@ -1,20 +1,19 @@
 /**
-* Lead Author(s): Claude-Arthur Dumesle
-*
-* Version: 5/5/2025
-*/
-
-
+ * Lead Author(s): Claude-Arthur Dumesle
+ *
+ * Version: 5/5/2025
+ */
 
 /**
  * 
- * Purpose: The responsibility of Defense is construct all necessary methods for Defense Structures
+ * Purpose: The responsibility of Defense is construct all necessary methods for
+ * Defense Structures
  */
-public interface Defense 
+public interface Defense
 {
-	//Defenses must attack
+	// Defenses must attack
 	void attack();
-	
-	//Defenses must scanMap
+
+	// Defenses must scanMap
 	void scanMap();
 }

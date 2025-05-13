@@ -1,8 +1,9 @@
+
 /**
-* Lead Author(s): Claude-Arthur Dumesle
-*
-* Version: 5/12/2025
-*/
+ * Lead Author(s): Claude-Arthur Dumesle
+ *
+ * Version: 5/12/2025
+ */
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.net.URL;
@@ -21,36 +22,35 @@ import javax.swing.Timer;
  * Canon is-a Structure
  * Canon is Defense
  * 
- */ 
+ */
 public class Canon extends Structure implements Defense
 {
 
 	private int range = 2;// A Canon HAS-A range
 	private int damage = 10; // A Canon HAS-A damage
-	private Queue<Tile> atkArea = new LinkedList<Tile>(); // A Canon HAS-MANY atkArea
-	
+	private Queue<Tile> atkArea = new LinkedList<Tile>(); // A Canon HAS-MANY
+															// atkArea
 
 	/**
 	 * 
 	 * Purpose: construct a canon obj that interacts in the map
+	 * 
 	 * @param newMap
 	 * @param newRow
 	 * @param newCol
 	 */
-	public Canon (TowerDefenseModel newMap, int newRow, int newCol) 
+	public Canon(TowerDefenseModel newMap, int newRow, int newCol)
 	{
-		
-		super(newMap, newRow, newCol); //let parent handle references and paint
 
-	
+		super(newMap, newRow, newCol); // let parent handle references and paint
 
 		scanMap();
-		timer = new Timer(1000, new ActionListener() 
+		timer = new Timer(1000, new ActionListener()
 		{
 
-			//call attack every second
-			@Override 
-			public void actionPerformed(ActionEvent e) 
+			// call attack every second
+			@Override
+			public void actionPerformed(ActionEvent e)
 			{
 				attack();
 			}
@@ -59,10 +59,8 @@ public class Canon extends Structure implements Defense
 		timer.start();
 	}
 
-	
-	
-	//DEFENSE IMPLEMENTATIONS
-	
+	// DEFENSE IMPLEMENTATIONS
+
 	/**
 	 * Purpose: made to hold strucutre as a placingStructure
 	 */
@@ -71,52 +69,51 @@ public class Canon extends Structure implements Defense
 		// TODO Auto-generated constructor stub
 	}
 
-
-
 	/**
 	 * check targetable tiles for enemies, attack closest to base
 	 */
 	public void attack()
 	{
-		for(Tile tile: atkArea)// traverse through the stack
+		for (Tile tile : atkArea)// traverse through the stack
 		{
-			
-			if(tile.getEnemy() != null)
+
+			if (tile.getEnemy() != null)
 			{
 				tile.getEnemy().damageEnemy(damage);
 				System.out.println("enemy dmg for: " + damage);
-				break; //stop attacking after first enemy hit
+				break; // stop attacking after first enemy hit
 			}
-			
+
 		}
 	}
-
 
 	/**
 	 * store all the PathTiles in the range of the defense into atkArea stack
 	 */
-	public void scanMap() 
+	public void scanMap()
 	{
-		try 
+		try
 		{
-			//traverse through the 2Darr of tiles left->right, top->bottom
-			//atkArea is a stack, last items should be first to be scanned when attacking
-			for(int i = row - range; i <= row + range; i++) 
+			// traverse through the 2Darr of tiles left->right, top->bottom
+			// atkArea is a stack, last items should be first to be scanned when
+			// attacking
+			for (int i = row - range; i <= row + range; i++)
 			{
-				for(int j = col - range; j <= row + range; j++)
+				for (int j = col - range; j <= row + range; j++)
 				{
 
 					System.out.println("adding tile r: " + i + " c: " + j);
-					atkArea.add(map[i][j]);	
+					atkArea.add(map[i][j]);
 				}
 			}
 		}
-		catch(IndexOutOfBoundsException e) // ignore possible outofbounds indexes
+		catch (IndexOutOfBoundsException e) // ignore possible outofbounds
+											// indexes
 		{
 
 		}
 	}
-	
+
 	/**
 	 * Override parent, return canon img instead
 	 */
@@ -125,17 +122,16 @@ public class Canon extends Structure implements Defense
 	{
 		return getClass().getResource("/media/canon.png");
 	}
-	
+
 	/**
 	 * @param newMap
 	 * @param newRow
 	 * @param newCol
-	 * @return  a constructed canon
+	 * @return a constructed canon
 	 */
 	public Canon reconstruct(TowerDefenseModel newMap, int newRow, int newCol)
 	{
 		return new Canon(newMap, newRow, newCol);
 	}
-	
-}
 
+}

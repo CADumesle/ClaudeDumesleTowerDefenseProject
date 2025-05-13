@@ -1,9 +1,9 @@
-/**
-* Lead Author(s): Claude-Arthur Dumesle
-*
-* Version: 5/12/2025
-*/
 
+/**
+ * Lead Author(s): Claude-Arthur Dumesle
+ *
+ * Version: 5/12/2025
+ */
 
 import java.awt.BorderLayout;
 import java.awt.Component;
@@ -19,25 +19,27 @@ import javax.swing.JPanel;
 
 /**
  * 
- * Purpose: The reponsibility of TowerDefenseModel is to create a 2D map containing all ingame objects
+ * Purpose: The reponsibility of TowerDefenseModel is to create a 2D map
+ * containing all ingame objects
  *
  * TowerDefenseModel is-a JPanel
  */
 public class TowerDefenseModel extends JPanel
 {
 
-	private Player player = new Player(10,0,0); // TMD HAS-A Player
-	
-	private static final int DIMENSION = 9; // TDM HAS-A DIMENSION
-	
-	private Tile[][] tiles = new Tile[DIMENSION][DIMENSION]; //TDM Has-Many tiles
+	private Player player = new Player(10, 0, 0); // TMD HAS-A Player
 
-	private PathTile nextTile = null; //TDM Has-A nextTile
+	private static final int DIMENSION = 9; // TDM HAS-A DIMENSION
+
+	private Tile[][] tiles = new Tile[DIMENSION][DIMENSION]; // TDM Has-Many
+																// tiles
+
+	private PathTile nextTile = null; // TDM Has-A nextTile
 
 	private PathTile startPath; // TDM Has-A startPath
 
 	private Enemy enemy = new Enemy(); // TDM Has-A Enemy
-	
+
 	private boolean placingMode = false; // TDM HAS-A placing mode
 
 	private Structure placingStructure; // TDM HAS-A placing Strucure
@@ -47,37 +49,33 @@ public class TowerDefenseModel extends JPanel
 	 */
 	public TowerDefenseModel()
 	{
-		
-		
-		setLayout(new GridLayout(DIMENSION,DIMENSION));
+
+		setLayout(new GridLayout(DIMENSION, DIMENSION));
 		createMap();
 
 		startPath.spawn(enemy);
-		
-		
-		
+
 		MouseListener mListener = new MouseListener(this);
 		this.addMouseListener(mListener);
 
 	}
 
-
-
 	/**
 	 * 
 	 * Purpose: manually create a course for the player
 	 */
-	public void createMap() 
+	public void createMap()
 	{
-		//create a loop to traverse through grid
+		// create a loop to traverse through grid
 		for (int i = 0; i < DIMENSION; i++)
 		{
 
-			for(int k = 0; k <DIMENSION; k++)
+			for (int k = 0; k < DIMENSION; k++)
 			{
-				/////////// make the the last center Tile of the grid a startPath
-				//eEnemis traverse from bottom to top
-				if((i == 8) && (k == 4))
+				/////////// make the the last center Tile of the grid a
+				/////////// startPath
+				// eEnemis traverse from bottom to top
+				if ((i == 8) && (k == 4))
 				{
 					PathTile path = new PathTile(nextTile);
 					add(path);
@@ -102,14 +100,14 @@ public class TowerDefenseModel extends JPanel
 			}
 		}
 	}
-	
+
 	/**
 	 * 
 	 * Purpose: let player in and out of Placing mode
 	 */
 	public void togglePlacingMode()
 	{
-		if(placingMode)
+		if (placingMode)
 		{
 			placingMode = false;
 		}
@@ -118,19 +116,21 @@ public class TowerDefenseModel extends JPanel
 			placingMode = true;
 		}
 	}
-	
+
 	/*
 	 * Purpose: check if in placing mode
 	 * @return: placingmode
 	 */
-	public boolean isPlacingMode() 
+	public boolean isPlacingMode()
 	{
 		return placingMode;
 	}
-	
+
 	/**
-	 * note: maybe change later to a queue.add and let player buy multiple at once
+	 * note: maybe change later to a queue.add and let player buy multiple at
+	 * once
 	 * Purpose: keep structure bought stored
+	 * 
 	 * @param newStructure
 	 */
 	public void setPlacingStructure(Structure newStructure)
@@ -141,39 +141,42 @@ public class TowerDefenseModel extends JPanel
 	/**
 	 * 
 	 * Purpose: place structure in wanted row,col
+	 * 
 	 * @param row
 	 * @param col
 	 */
 	public void placeStructure(Structure newStructure, int row, int col)
 	{
 		Tile placeArea = tiles[row][col];
-		
-		
-		placeArea.add(newStructure.reconstruct(this, row, col), BorderLayout.CENTER);
-		
+
+		placeArea.add(newStructure.reconstruct(this, row, col),
+				BorderLayout.CENTER);
+
 		placeArea.revalidate();
 		placeArea.update(getGraphics());
 	}
-	
+
 	/**
 	 * 
 	 * Purpose: return structure being placed
+	 * 
 	 * @return placing structure
 	 */
 	public Structure getPlacingStructure()
 	{
 		return placingStructure;
 	}
-	
+
 	/**
 	 * 
 	 * @return model's 2d array
 	 */
 	public Tile[][] getMap()
 	{
-		
+
 		return tiles;
 	}
+
 	/**
 	 * 
 	 * @return DIMENSION
@@ -182,7 +185,7 @@ public class TowerDefenseModel extends JPanel
 	{
 		return DIMENSION;
 	}
-	
+
 	public Player getPlayer()
 	{
 		return player;

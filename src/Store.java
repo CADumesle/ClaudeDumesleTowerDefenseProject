@@ -1,8 +1,9 @@
+
 /**
-* Lead Author(s): Claude-Arthur Dumesle
-*
-* Version: 5/5/2025
-*/
+ * Lead Author(s): Claude-Arthur Dumesle
+ *
+ * Version: 5/5/2025
+ */
 
 import java.awt.Color;
 import java.awt.FlowLayout;
@@ -18,39 +19,42 @@ import javax.swing.border.Border;
 
 /**
  * 
- * Purpose: The reponsibility of Store is let user get or updrage structures in exchange of resources
+ * Purpose: The reponsibility of Store is let user get or updrage structures in
+ * exchange of resources
  *
  * Store is-a JPanel
  */
-public class Store extends JPanel 
+public class Store extends JPanel
 {
 	private Player player; // Store HAS-A player
-	private TowerDefenseModel model; //Store HAS-A model
-	
+	private TowerDefenseModel model; // Store HAS-A model
+
 	/**
 	 * 
-	 * Purpose: Constructor that passes player and TowerDefenseModel reference to Store
+	 * Purpose: Constructor that passes player and TowerDefenseModel reference
+	 * to Store
+	 * 
 	 * @param newPlayer
 	 * @param newModel
 	 */
-	public Store(Player newPlayer, TowerDefenseModel newModel) 
+	public Store(Player newPlayer, TowerDefenseModel newModel)
 	{
-		
+
 		player = newPlayer;
 		model = newModel;
-		
+
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		setAlignmentY(FlowLayout.CENTER);
 		Border blackline = BorderFactory.createLineBorder(Color.black);
 		setBorder(blackline);
-		setBackground(new Color(196,164,132));
-		
+		setBackground(new Color(196, 164, 132));
+
 		JLabel header = new JLabel("BUY OR UPGRADE");
 		add(header);
-		
-		//placeholder Button to try defense
-		JButton	canonButton = new JButton("Buy Canon");
-		canonButton.addActionListener(new ActionListener() 
+
+		// placeholder Button to try defense
+		JButton canonButton = new JButton("Buy Canon");
+		canonButton.addActionListener(new ActionListener()
 		{
 			@Override
 			public void actionPerformed(ActionEvent e)
@@ -60,10 +64,10 @@ public class Store extends JPanel
 			}
 		});
 		add(canonButton);
-		
-		//placeholder Button to try defense
-		JButton	lumberButton = new JButton("Buy LumbYards");
-		lumberButton.addActionListener(new ActionListener() 
+
+		// placeholder Button to try defense
+		JButton lumberButton = new JButton("Buy LumbYards");
+		lumberButton.addActionListener(new ActionListener()
 		{
 			@Override
 			public void actionPerformed(ActionEvent e)
@@ -73,6 +77,6 @@ public class Store extends JPanel
 			}
 		});
 		add(lumberButton);
-		
+
 	}
 }

@@ -1,8 +1,9 @@
+
 /**
-* Lead Author(s): Claude-Arthur Dumesle
-*
-* Version: 5/12/2025
-*/
+ * Lead Author(s): Claude-Arthur Dumesle
+ *
+ * Version: 5/12/2025
+ */
 
 import javax.swing.JPanel;
 
@@ -15,14 +16,15 @@ import javax.swing.JPanel;
  */
 public class Tile extends JPanel
 {
-	public Tile() 
+	public Tile()
 	{
-		
+
 	}
-	
+
 	/**
 	 * 
-	 * can you place on this tile? 
+	 * can you place on this tile?
+	 * 
 	 * @return false (default)
 	 */
 	public boolean isPlaceable()
