@@ -100,7 +100,7 @@ public class PathTile extends Tile
 	 * 
 	 * Purpose:method used when enemy leaves Path
 	 */
-	public void clear()
+	public void clear(Enemy enemy)
 	{
 		remove(currentEnemy);
 		currentEnemy = null;

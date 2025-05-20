@@ -17,7 +17,6 @@ import javax.swing.JFrame;
 public class MainGame extends JFrame
 {
 	private TowerDefenseModel model; // MainGame has a model
-	private Player player;
 
 	/**
 	 * 
@@ -29,7 +28,6 @@ public class MainGame extends JFrame
 	{
 
 		model = newModel;
-		player = model.getPlayer();
 
 		setTitle("Tower Defense");
 		setLayout(new BorderLayout());
@@ -38,16 +36,16 @@ public class MainGame extends JFrame
 		pack();
 		setVisible(true);
 
-		Resources resources = new Resources(player);
-		add(resources, BorderLayout.NORTH);
+		add(model.getPlayerResource(), BorderLayout.NORTH);
 
-		Store store = new Store(player, model);
+		Store store = new Store(model.getPlayerResource(), model);
 		add(store, BorderLayout.EAST);
 
 		add(model, BorderLayout.CENTER);
 
-		Store filler = new Store(player, model);
-		add(filler, BorderLayout.WEST);
+		StructureInventory playerStructures = new StructureInventory(
+				model.getPlayerResource());
+		add(playerStructures, BorderLayout.WEST);
 
 		pack();
 	}

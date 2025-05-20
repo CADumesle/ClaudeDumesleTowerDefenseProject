@@ -2,7 +2,7 @@
 /**
  * Lead Author(s): Claude-Arthur Dumesle
  *
- * Version: 5/5/2025
+ * Version: 5/19/2025
  */
 
 import java.awt.Color;
@@ -26,7 +26,7 @@ import javax.swing.border.Border;
  */
 public class Store extends JPanel
 {
-	private Player player; // Store HAS-A player
+	private PlayerResource playerResource; // Store HAS-A player
 	private TowerDefenseModel model; // Store HAS-A model
 
 	/**
@@ -37,10 +37,10 @@ public class Store extends JPanel
 	 * @param newPlayer
 	 * @param newModel
 	 */
-	public Store(Player newPlayer, TowerDefenseModel newModel)
+	public Store(PlayerResource newPlayerResource, TowerDefenseModel newModel)
 	{
 
-		player = newPlayer;
+		playerResource = newPlayerResource;
 		model = newModel;
 
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
@@ -49,34 +49,76 @@ public class Store extends JPanel
 		setBorder(blackline);
 		setBackground(new Color(196, 164, 132));
 
-		JLabel header = new JLabel("BUY OR UPGRADE");
+		JLabel header = new JLabel("BUY STRUCTURES");
 		add(header);
 
-		// placeholder Button to try defense
-		JButton canonButton = new JButton("Buy Canon");
+		// button to buy Canon
+		JButton canonButton = new JButton("Canon: 10 Wood");
 		canonButton.addActionListener(new ActionListener()
 		{
 			@Override
 			public void actionPerformed(ActionEvent e)
 			{
-				model.setPlacingStructure(new Canon());
-				model.togglePlacingMode(); // activates placing mode
+				if( playerResource.getWood() >= 10 )
+				{
+					model.setPlacingStructure(new Canon());
+					model.togglePlacingMode(); // activates placing mode
+					playerResource.takeWood(10);
+				}
 			}
 		});
 		add(canonButton);
 
-		// placeholder Button to try defense
-		JButton lumberButton = new JButton("Buy LumbYards");
+		// button to buy archerTower
+		JButton archerButton = new JButton("Archer Tower: 20");
+		archerButton.addActionListener(new ActionListener()
+		{
+			@Override
+			public void actionPerformed(ActionEvent e)
+			{
+				if( playerResource.getWood() >= 20 )
+				{
+					model.setPlacingStructure(new ArcherTower());
+					model.togglePlacingMode(); // activates placing mode
+					playerResource.takeWood(20);
+				}
+			}
+		});
+		add(archerButton);
+		
+		// button to buy lumberyard
+		JButton lumberButton = new JButton("Buy LumbYard: 25 Wood");
 		lumberButton.addActionListener(new ActionListener()
 		{
 			@Override
 			public void actionPerformed(ActionEvent e)
 			{
-				model.setPlacingStructure(new LumberYard());
-				model.togglePlacingMode(); // activates placing mode
+				if( playerResource.getWood() >= 25 )
+				{
+					model.setPlacingStructure(new LumberYard());
+					model.togglePlacingMode(); // activates placing mode
+					playerResource.takeWood(25);
+				}
 			}
 		});
 		add(lumberButton);
+
+		// Button to buy mineshaft
+		JButton mineShaftButton = new JButton("Buy MineShaft: 50 Wood");
+		mineShaftButton.addActionListener(new ActionListener()
+		{
+			@Override
+			public void actionPerformed(ActionEvent e)
+			{
+				if( playerResource.getWood() >= 50 )
+				{
+					model.setPlacingStructure(new MineShaft());
+					model.togglePlacingMode(); // activates placing mode
+					playerResource.takeWood(50);
+				}
+			}
+		});
+		add(mineShaftButton);
 
 	}
 }

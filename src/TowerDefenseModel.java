@@ -27,7 +27,9 @@ import javax.swing.JPanel;
 public class TowerDefenseModel extends JPanel
 {
 
-	private Player player = new Player(10, 0, 0); // TMD HAS-A Player
+	private PlayerResource playerResource = new PlayerResource(1000, 0, 0); // TMD
+																			// HAS-A
+																			// Player
 
 	private static final int DIMENSION = 9; // TDM HAS-A DIMENSION
 
@@ -186,8 +188,8 @@ public class TowerDefenseModel extends JPanel
 		return DIMENSION;
 	}
 
-	public Player getPlayer()
+	public PlayerResource getPlayerResource()
 	{
-		return player;
+		return playerResource;
 	}
 }

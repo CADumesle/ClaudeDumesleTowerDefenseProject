@@ -21,6 +21,7 @@ import javax.swing.JPanel;
 public class GroundTile extends Tile
 {
 
+	private Structure currentStructure;
 	// Structure structures[];
 
 	/**
@@ -29,14 +30,43 @@ public class GroundTile extends Tile
 	 */
 	public GroundTile()
 	{
-		this.setBackground(new Color(144, 238, 144));
+		this.setBackground(new Color(45, 178, 0));
 
 		setLayout(new BorderLayout());
+	}
+
+	/**
+	 * 
+	 * Purpose: set currentSctructure
+	 * 
+	 * @param newStructure
+	 */
+	public void setStructure(Structure newStructure)
+	{
+		currentStructure = newStructure;
 	}
 
 	@Override
 	public boolean isPlaceable()
 	{
 		return true;
+	}
+
+	/**
+	 * 
+	 * Purpose: check if GroundTile is occupied
+	 * 
+	 * @return
+	 */
+	public boolean hasStructure()
+	{
+		if (currentStructure != null)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
 	}
 }

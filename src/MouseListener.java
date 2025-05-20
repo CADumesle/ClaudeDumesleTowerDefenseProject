@@ -54,8 +54,24 @@ public class MouseListener extends MouseAdapter
 		// if in placing mode place structure bought and toggle placing mode off
 		if (model.isPlacingMode())
 		{
-			model.placeStructure(model.getPlacingStructure(), row, col);
-			model.togglePlacingMode();
+			try
+			{
+				if (model.getMap()[row][col].isPlaceable())
+				{
+					model.placeStructure(model.getPlacingStructure(), row, col);
+					model.togglePlacingMode();
+				}
+				else
+				{
+					throw new OccupiedTileException();
+				}
+			}
+			catch (OccupiedTileException e1)
+			{
+				e1.getMessage();
+			}
+			// model.placeStructure(model.getPlacingStructure(), row, col);
+			// model.togglePlacingMode();
 		}
 
 	}

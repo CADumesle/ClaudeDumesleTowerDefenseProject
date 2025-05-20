@@ -59,6 +59,10 @@ public class Enemy extends JPanel
 	{
 		health -= damage;
 		// if damage reaches 0 or lower delete enemy from game
+		if (health <= 0)
+		{
+			currentTile.clear(this);
+		}
 	}
 
 	/**
@@ -79,12 +83,12 @@ public class Enemy extends JPanel
 	 */
 	public void move()
 	{
-		// dont move if not on any pathtile
-		// dont move if there is no next tile
+		// don't move if not on any path tile
+		// don't move if there is no next tile
 		if ((currentTile != null) && (currentTile.getNextTile()) != null)
 		{
 			// update enemy's current tile
-			currentTile.clear();
+			currentTile.clear(this);
 
 			currentTile = currentTile.getNextTile();
 

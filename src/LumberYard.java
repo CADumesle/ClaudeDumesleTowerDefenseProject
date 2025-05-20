@@ -7,12 +7,19 @@ import javax.swing.Timer;
 /**
  * Lead Author(s): Claude-Arthur Dumesle
  *
- * Version: 5/12/2025
+ * Version: 5/19/2025
  */
 
+/**
+ * 
+ * Purpose: The reponsibility of LumberYard is .produce wood for player
+ *
+ * LumberYard is-a Structure
+ * LumberYard is Productive
+ */
 public class LumberYard extends Structure implements Productive
 {
-	private Player player; // LumberYard HAS-A player
+	private PlayerResource playerResource; // LumberYard HAS-A playerResource
 
 	private int woodProductionRate = 1; // LumberYard HAS-A woodProductionRate
 
@@ -28,16 +35,16 @@ public class LumberYard extends Structure implements Productive
 	{
 		super(newMap, newRow, newCol); // let parent handle constructions
 
-		player = newMap.getPlayer();
+		playerResource = newMap.getPlayerResource();
 
-		timer = new Timer(1000, new ActionListener()
+		Timer timer = new Timer(1000, new ActionListener()
 		{
 
 			// call attack every second
 			@Override
 			public void actionPerformed(ActionEvent e)
 			{
-				player.addWood(woodProductionRate);
+				playerResource.addWood(woodProductionRate);
 
 			}
 		});
@@ -57,7 +64,7 @@ public class LumberYard extends Structure implements Productive
 	 * overriden method to set lumberyard img instead
 	 */
 	@Override
-	protected URL getURL()
+	public URL getURL()
 	{
 		return getClass().getResource("/media/lumberyard.png");
 	}

@@ -25,11 +25,10 @@ import javax.swing.Timer;
  */
 public abstract class Structure extends JPanel
 {
-	protected int row; // A Structure HAS-A position x
-	protected int col; // A Structure HAS-a position y
+	private int row; // A Structure HAS-A position x
+	private int col; // A Structure HAS-a position y
 
-	protected Tile[][] map; // A Structure HAS-A map
-	protected Timer timer; // A Structure HAS-A timer
+	private Tile[][] map; // A Structure HAS-A map
 
 	private BufferedImage image; // A Strucure HAS-A image
 
@@ -45,12 +44,12 @@ public abstract class Structure extends JPanel
 	/*
 	 * main constructor for Structure
 	 */
-	public Structure(TowerDefenseModel newMap, int newRow, int newCol)
+	public Structure(TowerDefenseModel newModel, int newRow, int newCol)
 	{
-		this.setMinimumSize(newMap.getSize());
+		this.setMinimumSize(newModel.getSize());
 		row = newRow;
 		col = newCol;
-		map = newMap.getMap();
+		map = newModel.getMap();
 
 		try
 		{
@@ -85,7 +84,7 @@ public abstract class Structure extends JPanel
 	 * 
 	 * @return URL for background image
 	 */
-	protected URL getURL()
+	public URL getURL()
 	{
 		return getClass().getResource("/media/structure.png");
 	}
@@ -97,6 +96,33 @@ public abstract class Structure extends JPanel
 			int newCol)
 	{
 		return null;
+	}
+
+	/**
+	 * 
+	 * Purpose:
+	 * 
+	 * @return row
+	 */
+	public int getRow()
+	{
+		return row;
+	}
+
+	/**
+	 * 
+	 * Purpose:
+	 * 
+	 * @return col
+	 */
+	public int getCol()
+	{
+		return col;
+	}
+
+	public Tile[][] getMap()
+	{
+		return map;
 	}
 
 }
