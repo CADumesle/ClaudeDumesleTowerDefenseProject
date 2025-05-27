@@ -1,10 +1,3 @@
-
-/**
- * Lead Author(s): Claude-Arthur Dumesle
- *
- * Version: 5/19/2025
- */
-
 import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
@@ -16,6 +9,20 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.Border;
+/**
+ * Lead Author(s): Claude-Arthur Dumesle
+ * 
+ * @author:  Claude-Arthur Dumesle
+ * References:
+ * Oracle. (2025a, April 5). Class Point. Point (java platform SE 8 ). https://docs.oracle.com/javase/8/docs/api/java/awt/Point.html 
+ * Oracle. (2025, April 5). Class ThreadLocalRandom. Threadlocalrandom (java platform SE 8 ). https://docs.oracle.com/javase/8/docs//api/java/util/concurrent/ThreadLocalRandom.html
+ *  *1. Agarwal, P. (2021, November 14). Image processing in java - read and write. GeeksforGeeks. GeeksforGeeks. 
+ *Retrieved May 8, 2025, from https://www.geeksforgeeks.org/image-processing-in-java-read-and-write/  
+ * 
+ * Version/date: 5/26/25
+ * 
+ * 
+ */
 
 /**
  * 
@@ -40,8 +47,8 @@ public class Store extends JPanel
 	public Store(PlayerResource newPlayerResource, TowerDefenseModel newModel)
 	{
 
-		playerResource = newPlayerResource;
-		model = newModel;
+		playerResource = newPlayerResource; //pass a reference to player resouce
+		model = newModel; // pass a reference to moddel
 
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		setAlignmentY(FlowLayout.CENTER);
@@ -59,7 +66,7 @@ public class Store extends JPanel
 			@Override
 			public void actionPerformed(ActionEvent e)
 			{
-				if( playerResource.getWood() >= 10 )
+				if( playerResource.getWood() >= 10 ) //  check if player has resources needed
 				{
 					model.setPlacingStructure(new Canon());
 					model.togglePlacingMode(); // activates placing mode
@@ -76,7 +83,7 @@ public class Store extends JPanel
 			@Override
 			public void actionPerformed(ActionEvent e)
 			{
-				if( playerResource.getWood() >= 20 )
+				if( playerResource.getWood() >= 20 ) // check if [player has resources needed
 				{
 					model.setPlacingStructure(new ArcherTower());
 					model.togglePlacingMode(); // activates placing mode
@@ -110,7 +117,8 @@ public class Store extends JPanel
 			@Override
 			public void actionPerformed(ActionEvent e)
 			{
-				if( playerResource.getWood() >= 50 )
+				
+				if( playerResource.getWood() >= 50 ) //check if player has recources needed
 				{
 					model.setPlacingStructure(new MineShaft());
 					model.togglePlacingMode(); // activates placing mode

@@ -3,11 +3,18 @@ import java.awt.event.ActionListener;
 import java.net.URL;
 
 import javax.swing.Timer;
-
 /**
  * Lead Author(s): Claude-Arthur Dumesle
- *
- * Version: 5/19/2025
+ * 
+ * @author:  Claude-Arthur Dumesle
+ * References:
+ * Oracle. (2025a, April 5). Class Point. Point (java platform SE 8 ). https://docs.oracle.com/javase/8/docs/api/java/awt/Point.html 
+ * Oracle. (2025, April 5). Class ThreadLocalRandom. Threadlocalrandom (java platform SE 8 ). https://docs.oracle.com/javase/8/docs//api/java/util/concurrent/ThreadLocalRandom.html
+ *  *1. Agarwal, P. (2021, November 14). Image processing in java - read and write. GeeksforGeeks. GeeksforGeeks. 
+ *Retrieved May 8, 2025, from https://www.geeksforgeeks.org/image-processing-in-java-read-and-write/  
+ * 
+ * Version/date: 5/26/25
+ * 
  */
 
 /**
@@ -17,7 +24,7 @@ import javax.swing.Timer;
  * LumberYard is-a Structure
  * LumberYard is Productive
  */
-public class LumberYard extends Structure implements Productive
+public class LumberYard extends Structure 
 {
 	private PlayerResource playerResource; // LumberYard HAS-A playerResource
 
@@ -35,17 +42,17 @@ public class LumberYard extends Structure implements Productive
 	{
 		super(newMap, newRow, newCol); // let parent handle constructions
 
-		playerResource = newMap.getPlayerResource();
+		playerResource = newMap.getPlayerResource(); // pass a reference to players resource
 
-		Timer timer = new Timer(1000, new ActionListener()
+		Timer timer = new Timer(500, new ActionListener()
 		{
 
-			// call attack every second
+			// call to add wood to playerresource every 500 millisecond
 			@Override
 			public void actionPerformed(ActionEvent e)
 			{
+				animate();
 				playerResource.addWood(woodProductionRate);
-
 			}
 		});
 
@@ -60,14 +67,7 @@ public class LumberYard extends Structure implements Productive
 
 	}
 
-	/**
-	 * overriden method to set lumberyard img instead
-	 */
-	@Override
-	public URL getURL()
-	{
-		return getClass().getResource("/media/lumberyard.png");
-	}
+
 
 	/**
 	 * @return a LumberYard constructed lumberyard obj
@@ -76,6 +76,34 @@ public class LumberYard extends Structure implements Productive
 			int newCol)
 	{
 		return new LumberYard(newMap, newRow, newCol);
+	}
+	
+	/**
+	 * Override Structure name
+	 * @return "LumberYard"
+	 */
+	@Override
+	public String getName()
+	{
+		return "LumberYard";
+	}
+	
+	/**
+	 * overriden method to set lumberyard img instead
+	 */
+	@Override
+	public URL getImageURL()
+	{
+		return getClass().getResource("/media/lumberyard.png");
+	}
+	
+	/**
+	 * Overriden method to get lumberyard animated img instead
+	 */
+	@Override
+	public URL getAnimationURL()
+	{
+		return getClass().getResource("/media/AnimatedLumberYard.png");
 	}
 
 }

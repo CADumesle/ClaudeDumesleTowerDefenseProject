@@ -1,9 +1,3 @@
-
-/**
- * Lead Author(s): Claude-Arthur Dumesle
- *
- * Version: 5/19/2025
- */
 import java.awt.Color;
 import java.awt.FlowLayout;
 import java.util.ArrayList;
@@ -14,9 +8,25 @@ import javax.swing.JPanel;
 import javax.swing.border.Border;
 
 /**
+ * Lead Author(s): Claude-Arthur Dumesle
  * 
- * Purpose: The reponsibility of Player is store user's current resources
+ * @author:  Claude-Arthur Dumesle
+ * References:
+ * Oracle. (2025a, April 5). Class Point. Point (java platform SE 8 ). https://docs.oracle.com/javase/8/docs/api/java/awt/Point.html 
+ * Oracle. (2025, April 5). Class ThreadLocalRandom. Threadlocalrandom (java platform SE 8 ). https://docs.oracle.com/javase/8/docs//api/java/util/concurrent/ThreadLocalRandom.html
+ *  *1. Agarwal, P. (2021, November 14). Image processing in java - read and write. GeeksforGeeks. GeeksforGeeks. 
+ *Retrieved May 8, 2025, from https://www.geeksforgeeks.org/image-processing-in-java-read-and-write/  
+ * 
+ * Version/date: 5/26/25
+ * 
+ * 
+ */
+
+/**
+ * 
+ * Purpose: The reponsibility of PlayerResource is display all current resources of playwr
  *
+ * PlayerResource is-a JPanel
  */
 public class PlayerResource extends JPanel
 {
@@ -28,10 +38,16 @@ public class PlayerResource extends JPanel
 	private int diamond;
 
 	private JLabel resourceDisplay; // a player has a resource Display
+	
 
-	// a player has-many structuress
-	private ArrayList<Structure> structures = new ArrayList<Structure>();
 
+	/**
+	 * 
+	 * Purpose:  Main Constructor for PlayerResource
+	 * @param newWood
+	 * @param newStone
+	 * @param newDiamond
+	 */
 	public PlayerResource(int newWood, int newStone, int newDiamond)
 	{
 		wood = newWood;
@@ -40,6 +56,7 @@ public class PlayerResource extends JPanel
 
 		this.setBackground(new Color(0, 100, 0));
 		setLayout(new FlowLayout());
+		
 		Border blackline = BorderFactory.createLineBorder(Color.black);
 		setBorder(blackline);
 
@@ -81,16 +98,6 @@ public class PlayerResource extends JPanel
 		updateResources();
 	}
 
-	/**
-	 * 
-	 * Purpose: add a new structure to the list
-	 * 
-	 * @param newStructure
-	 */
-	public void addStructure(Structure newStructure)
-	{
-		structures.add(newStructure);
-	}
 
 	/**
 	 * 
@@ -128,6 +135,7 @@ public class PlayerResource extends JPanel
 		updateResources();
 	}
 
+	
 	/**
 	 * 
 	 * Purpose:
@@ -166,12 +174,4 @@ public class PlayerResource extends JPanel
 		return diamond;
 	}
 
-	/**
-	 * 
-	 * @return structures
-	 */
-	public ArrayList<Structure> getStructures()
-	{
-		return structures;
-	}
 }

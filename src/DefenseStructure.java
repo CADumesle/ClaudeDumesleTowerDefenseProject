@@ -1,9 +1,3 @@
-
-/**
- * Lead Author(s): Claude-Arthur Dumesle
- *
- * Version: 5/19/2025
- */
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.net.URL;
@@ -14,24 +8,37 @@ import java.util.Stack;
 
 import javax.swing.JLabel;
 import javax.swing.Timer;
+/**
+ * Lead Author(s): Claude-Arthur Dumesle
+ * 
+ * @author:  Claude-Arthur Dumesle
+ * References:
+ * Oracle. (2025a, April 5). Class Point. Point (java platform SE 8 ). https://docs.oracle.com/javase/8/docs/api/java/awt/Point.html 
+ * Oracle. (2025, April 5). Class ThreadLocalRandom. Threadlocalrandom (java platform SE 8 ). https://docs.oracle.com/javase/8/docs//api/java/util/concurrent/ThreadLocalRandom.html
+ *  *1. Agarwal, P. (2021, November 14). Image processing in java - read and write. GeeksforGeeks. GeeksforGeeks. 
+ *Retrieved May 8, 2025, from https://www.geeksforgeeks.org/image-processing-in-java-read-and-write/  
+ * 
+ * Version/date: 5/26/25
+ * 
+ * 
+ */
 
 /**
  * 
- * Purpose: The reponsibility of Canon is to detect and lower Enemy HP
+ * Purpose: This file serves as a parent for defensive strucutres to inherit from
  *
- * Canon is-a Structure
- * Canon is Defense
+ * DEfenseStrucure is-a Structure
+ * DefeneStructure is Defense
  * 
  */
 public class DefenseStructure extends Structure implements Defense
 {
-
-	private Queue<Tile> atkArea = new LinkedList<Tile>(); // A Canon HAS-MANY
-															// atkAre
-
+	// A DefenseStrcutre HAS-A target area, HAs-Many tiles
+	private Queue<Tile> targetArea=  new LinkedList<Tile>();// Area when DefStructure can hit an enemy
+	
 	/**
 	 * 
-	 * Purpose: construct a canon obj that interacts in the map
+	 * Purpose: construct a DefenseStructure obj that interacts in the map
 	 * 
 	 * @param newMap
 	 * @param newRow
@@ -51,6 +58,7 @@ public class DefenseStructure extends Structure implements Defense
 			@Override
 			public void actionPerformed(ActionEvent e)
 			{
+				
 				attack();
 			}
 		});
@@ -61,11 +69,23 @@ public class DefenseStructure extends Structure implements Defense
 	// DEFENSE IMPLEMENTATIONS
 
 	/**
-	 * Purpose: made to hold strucutre as a placingStructure
+	 * Purpose: made to hold structure as a placingStructure
 	 */
 	public DefenseStructure()
 	{
-		// TODO Auto-generated constructor stub
+		
+	}
+	
+	/**
+	 * @param newMap
+	 * @param newRow
+	 * @param newCol
+	 * @return a constructed canon
+	 */
+	public DefenseStructure reconstruct(TowerDefenseModel newMap, int newRow,
+			int newCol)
+	{
+		return new DefenseStructure(newMap, newRow, newCol);
 	}
 
 	/**
@@ -73,11 +93,13 @@ public class DefenseStructure extends Structure implements Defense
 	 */
 	public void attack()
 	{
-		for (Tile tile : atkArea)// traverse through the stack
+		
+		for (Tile tile : targetArea)// traverse through the stack
 		{
 
 			if (tile.getEnemy() != null)
 			{
+				animate();
 				tile.getEnemy().damageEnemy(getDamage());
 				System.out.println("enemy dmg for: " + getDamage());
 				break; // stop attacking after first enemy hit
@@ -96,7 +118,7 @@ public class DefenseStructure extends Structure implements Defense
 		// attacking
 		for (int i = getRow() - getRange(); i <= getRow() + getRange(); i++)
 		{
-			System.out.println(getRange());
+
 
 			for (int j = getCol() - getRange(); j <= getCol() + getRange(); j++)
 			{
@@ -104,7 +126,7 @@ public class DefenseStructure extends Structure implements Defense
 				// System.out.println("adding tile r: " + i + " c: " + j);
 				try
 				{
-					atkArea.add(getMap()[i][j]);
+					targetArea.add(getMap()[i][j]);
 				}
 				catch (IndexOutOfBoundsException e)
 				{
@@ -116,30 +138,31 @@ public class DefenseStructure extends Structure implements Defense
 		}
 	}
 
+	
+
+	/***
+	 * 
+	 * Override for this class and children to be able to be upgraded
+	 */
+	@Override
+	public boolean isUpgradeable()
+	{
+		return true;
+	}
+	
 	/**
 	 * Override parent, return canon img instead
 	 */
 	@Override
-	public URL getURL()
+	public URL getImageURL()
 	{
 		return getClass().getResource("/media/canon.png");
 	}
 
-	/**
-	 * @param newMap
-	 * @param newRow
-	 * @param newCol
-	 * @return a constructed canon
-	 */
-	public DefenseStructure reconstruct(TowerDefenseModel newMap, int newRow,
-			int newCol)
-	{
-		return new DefenseStructure(newMap, newRow, newCol);
-	}
+
 
 	/**
 	 * 
-	 * Purpose:
 	 * 
 	 * @return DEfense Strucure Damage
 	 */
@@ -150,7 +173,6 @@ public class DefenseStructure extends Structure implements Defense
 
 	/**
 	 * 
-	 * Purpose:
 	 * 
 	 * @return DEfense Structure Range
 	 */
