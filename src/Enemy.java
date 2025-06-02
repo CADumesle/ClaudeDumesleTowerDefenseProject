@@ -13,12 +13,10 @@ import javax.swing.Timer;
  * 
  * @author:  Claude-Arthur Dumesle
  * References:
- * Oracle. (2025a, April 5). Class Point. Point (java platform SE 8 ). https://docs.oracle.com/javase/8/docs/api/java/awt/Point.html 
- * Oracle. (2025, April 5). Class ThreadLocalRandom. Threadlocalrandom (java platform SE 8 ). https://docs.oracle.com/javase/8/docs//api/java/util/concurrent/ThreadLocalRandom.html
- *  *1. Agarwal, P. (2021, November 14). Image processing in java - read and write. GeeksforGeeks. GeeksforGeeks. 
+ *1. Agarwal, P. (2021, November 14). Image processing in java - read and write. GeeksforGeeks. GeeksforGeeks. 
  *Retrieved May 8, 2025, from https://www.geeksforgeeks.org/image-processing-in-java-read-and-write/  
  * 
- * Version/date: 5/26/25
+ * Version/date: 6/1/25
  * 
  * 
  */
@@ -27,20 +25,19 @@ import javax.swing.Timer;
  * 
  * Purpose: The reponsibility of Enemy is Traverse through the PathTile
  * this class serves as a parent from enemies to inherit from
- * LinkedList
  *
  * Enemy is-a JPanel
  */
 public class Enemy extends JPanel
 {
 	private PathTile currentTile; // Enemy Has-A currentTile
-	private Timer timer;// Enemy Has-A Timer
+	private Timer moveTimer;// Enemy Has-A moveTimer
 	
-	private BufferedImage image; // A Strucure HAS-A image
+	private BufferedImage displayImage; // A Enemy HAS-A displayImage
 
 	private int health; // Enemy HAS-A health
 	
-	private TowerDefenseModel model;
+	private TowerDefenseModel gameModel; // Enemy HAS-A model
 
 	/*
 	 * Enemy default constructor
@@ -50,12 +47,12 @@ public class Enemy extends JPanel
 		setHealth(getDesiredHealth());
 		
 		this.setMinimumSize(newModel.getSize());
-		model = newModel;
+		gameModel = newModel;
 		
 		try
 		{
 			URL imgURL = getURL();
-			image = ImageIO.read(imgURL); // set background image to desired img
+			displayImage = ImageIO.read(imgURL); // display desired image on panel
 											// url
 		}
 		catch (IOException e)
@@ -63,7 +60,7 @@ public class Enemy extends JPanel
 			e.printStackTrace();
 		}
 
-		timer = new Timer(getMovementSpeed(), new ActionListener()
+		moveTimer = new Timer(getMovementSpeed(), new ActionListener()
 		{
 
 			// call move method every second
@@ -74,7 +71,7 @@ public class Enemy extends JPanel
 			}
 		});
 
-		timer.start();
+		moveTimer.start();
 	}
 
 	/**
@@ -92,7 +89,7 @@ public class Enemy extends JPanel
 		System.out.println("enemy curr helth: " + health);
 		if (health <= 0)
 		{
-			model.lowerEnemiesLeft(); // lower enemy for tracker
+			gameModel.lowerEnemiesLeft(); // lower enemy for tracker
 			currentTile.clear(this);
 		}
 	}
@@ -118,7 +115,7 @@ public class Enemy extends JPanel
 		//if tile doesn;t have a next, it's the last tile
 		if (currentTile.getNextTile() == null)
 		{ // playerLose if enemy gets to ladt tile
-			model.playerLose();
+			gameModel.playerLose();
 		}
 		
 		// don't move if not on any path tile
@@ -135,22 +132,22 @@ public class Enemy extends JPanel
 		}
 		else
 		{
-			timer.stop();
+			moveTimer.stop();
 		}
 	}
 	
 	/**
-	 * Purpose: draw desired image on JPanel
+	 * Purpose: draw desired displayImage on JPanel
 	 */
 	@Override
 	protected void paintComponent(Graphics g)
 	{
 		// call it parents method
 		super.paintComponent(g);
-		// draw background on Jpanel if image isn't null
-		if (image != null)
+		// draw display image on the panel if not null
+		if (displayImage != null)
 		{
-			g.drawImage(image, 0, 0, getWidth(), getHeight(), this);
+			g.drawImage(displayImage, 0, 0, getWidth(), getHeight(), this);
 		}
 	}
 	

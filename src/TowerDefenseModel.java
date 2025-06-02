@@ -48,7 +48,7 @@ import javax.swing.Timer;
 public class TowerDefenseModel extends JPanel
 {
 	
-	private PlayerResource playerResource = new PlayerResource(30, 10, 0); // TMD
+	private PlayerResource playerResource = new PlayerResource(300, 10, 0); // TMD
 																			// HAS-A
 	private StructureInventory structureInventory = new StructureInventory(this);// Player
 
@@ -67,9 +67,9 @@ public class TowerDefenseModel extends JPanel
 	//TDM HAs-A pointToPathTile map
 	private Hashtable<Point,PathTile> pointToPathTile= new Hashtable<Point , PathTile>();
 	
-	private int enemiesLeft = 10; // TDM HAS-A enemiesLeft int(tracks enemies left before win)
+	private int enemiesLeft = 2; // TDM HAS-A enemiesLeft int(tracks enemies left before win)
 	
-	private int enemyCounter = 10; // TDM HAS-A enemyCounter (track howmany more have to spawn)
+	private int enemyCounter = 2; // TDM HAS-A enemyCounter (track howmany more have to spawn)
 	
 	Timer enemySpawnerTimer; // TDM HAS-A EnemiesSpawnerTimer
 

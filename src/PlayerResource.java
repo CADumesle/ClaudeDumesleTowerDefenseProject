@@ -11,13 +11,8 @@ import javax.swing.border.Border;
  * Lead Author(s): Claude-Arthur Dumesle
  * 
  * @author:  Claude-Arthur Dumesle
- * References:
- * Oracle. (2025a, April 5). Class Point. Point (java platform SE 8 ). https://docs.oracle.com/javase/8/docs/api/java/awt/Point.html 
- * Oracle. (2025, April 5). Class ThreadLocalRandom. Threadlocalrandom (java platform SE 8 ). https://docs.oracle.com/javase/8/docs//api/java/util/concurrent/ThreadLocalRandom.html
- *  *1. Agarwal, P. (2021, November 14). Image processing in java - read and write. GeeksforGeeks. GeeksforGeeks. 
- *Retrieved May 8, 2025, from https://www.geeksforgeeks.org/image-processing-in-java-read-and-write/  
  * 
- * Version/date: 5/26/25
+ * Version/date: 6/1/25
  * 
  * 
  */
@@ -30,14 +25,14 @@ import javax.swing.border.Border;
  */
 public class PlayerResource extends JPanel
 {
-	// a player has wood
-	private int wood;
-	// a player has stone
-	private int stone;
-	// a player has diamond
-	private int diamond;
+	// PlayerResource Has-A woodStoredCounter
+	private int woodStoredCounter;
+	// PlayerResource HAs-A stoneStoredCounter
+	private int stoneStoredCounter;
+	// PlayerResource Has-A diamondStoredCounter
+	private int diamondStoredCounter;
 
-	private JLabel resourceDisplay; // a player has a resource Display
+	private JLabel resourceDisplay; // PlayerResource Has-A resource Display
 	
 
 
@@ -50,9 +45,9 @@ public class PlayerResource extends JPanel
 	 */
 	public PlayerResource(int newWood, int newStone, int newDiamond)
 	{
-		wood = newWood;
-		stone = newStone;
-		diamond = newDiamond;
+		woodStoredCounter = newWood;
+		stoneStoredCounter = newStone;
+		diamondStoredCounter = newDiamond;
 
 		this.setBackground(new Color(0, 100, 0));
 		setLayout(new FlowLayout());
@@ -61,7 +56,7 @@ public class PlayerResource extends JPanel
 		setBorder(blackline);
 
 		resourceDisplay = new JLabel(
-				"Wood: " + wood + " Stone: " + stone + " Diamond: " + diamond);
+				"Wood: " + woodStoredCounter + " Stone: " + stoneStoredCounter + " Diamond: " + diamondStoredCounter);
 		add(resourceDisplay);
 	}
 
@@ -82,7 +77,7 @@ public class PlayerResource extends JPanel
 	 */
 	public void takeWood(int newWood)
 	{
-		wood -= newWood;
+		woodStoredCounter -= newWood;
 		updateResources();
 	}
 
@@ -94,7 +89,7 @@ public class PlayerResource extends JPanel
 	 */
 	public void takeStone(int newStone)
 	{
-		stone -= newStone;
+		stoneStoredCounter -= newStone;
 		updateResources();
 	}
 
@@ -107,7 +102,7 @@ public class PlayerResource extends JPanel
 	 */
 	public void addWood(int newWood)
 	{
-		wood += newWood;
+		woodStoredCounter += newWood;
 		updateResources();
 	}
 
@@ -119,7 +114,7 @@ public class PlayerResource extends JPanel
 	 */
 	public void addStone(int newStone)
 	{
-		stone += newStone;
+		stoneStoredCounter += newStone;
 		updateResources();
 	}
 
@@ -131,7 +126,7 @@ public class PlayerResource extends JPanel
 	 */
 	public void addDiamond(int newDiamond)
 	{
-		diamond += newDiamond;
+		diamondStoredCounter += newDiamond;
 		updateResources();
 	}
 
@@ -144,34 +139,34 @@ public class PlayerResource extends JPanel
 	 */
 	public String getResource()
 	{
-		return "Wood: " + wood + " Stone: " + stone + " Diamond: " + diamond;
+		return "Wood: " + woodStoredCounter + " Stone: " + stoneStoredCounter + " Diamond: " + diamondStoredCounter;
 	}
 
 	/**
 	 * 
-	 * @return wood
+	 * @return woodStoredCounter
 	 */
 	public int getWood()
 	{
-		return wood;
+		return woodStoredCounter;
 	}
 
 	/**
 	 * 
-	 * @return stone
+	 * @return stoneStoredCounter
 	 */
 	public int getStone()
 	{
-		return stone;
+		return stoneStoredCounter;
 	}
 
 	/**
 	 * 
-	 * @return diamond
+	 * @return diamondStoredCounter
 	 */
 	public int getDiamond()
 	{
-		return diamond;
+		return diamondStoredCounter;
 	}
 
 }

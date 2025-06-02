@@ -38,8 +38,8 @@ public abstract class Structure extends JPanel
 
 	private Tile[][] map; // A Structure HAS-A map
 
-	private BufferedImage baseImage; // A Strucure HAS-A image
-	private BufferedImage animatedImage; // A Structure HAS-A image
+	private BufferedImage baseImage; // A Strucure HAS-A baseImage
+	private BufferedImage animatedImage; // A Structure HAS-A animatedImage
 
 	/**
 	 * 
@@ -151,13 +151,18 @@ public abstract class Structure extends JPanel
 		return getClass().getResource("/media/structure.png");
 	}
 	
-	/*
-	 * only used for inherited obj to reconstruct
+	/**
+	 * 
+	 * Purpose: Used For Structure classes to be able to return a constructed version of themselves with pararams needed to function in-game
+	 * @param newMap
+	 * @param newRow
+	 * @param newCol
+	 * @retur null; Overriding classes return: new ChildStructure(TDM, row, col)
 	 */
 	public Structure reconstruct(TowerDefenseModel newMap, int newRow,
 			int newCol)
 	{
-		return null;
+		return null; //can't instantiate abstract thus return null
 	}
 
 
@@ -203,11 +208,12 @@ public abstract class Structure extends JPanel
 	
 	/**
 	 * 
-	 * Purpose: method for upgradeable defenses to override
+	 * Purpose: method used on Structures to improve change their values.. damage or image etc...
+	 * @return false by default, overriding children return true
 	 */
-	public void upgrade()
+	public boolean upgrade()
 	{
-		
+		return false;
 	}
 	
 	/**
@@ -223,14 +229,14 @@ public abstract class Structure extends JPanel
 		}
 		catch (IOException e)
 		{
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 	}
 	
 	/**
 	 * 
-	 * Purpose:  method to be overriden by chicldren to set their own animated image
+	 * Purpose:  method to be overriden by children to set their own animated image
 	 * @param newURL
 	 */
 	public void setAnimatedImage(URL newURL)
@@ -241,7 +247,7 @@ public abstract class Structure extends JPanel
 		}
 		catch (IOException e)
 		{
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 	}

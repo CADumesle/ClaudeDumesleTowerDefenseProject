@@ -13,12 +13,10 @@ import javax.swing.Timer;
  * 
  * @author:  Claude-Arthur Dumesle
  * References:
- * Oracle. (2025a, April 5). Class Point. Point (java platform SE 8 ). https://docs.oracle.com/javase/8/docs/api/java/awt/Point.html 
- * Oracle. (2025, April 5). Class ThreadLocalRandom. Threadlocalrandom (java platform SE 8 ). https://docs.oracle.com/javase/8/docs//api/java/util/concurrent/ThreadLocalRandom.html
- *  *1. Agarwal, P. (2021, November 14). Image processing in java - read and write. GeeksforGeeks. GeeksforGeeks. 
+ * 1. Agarwal, P. (2021, November 14). Image processing in java - read and write. GeeksforGeeks. GeeksforGeeks. 
  *Retrieved May 8, 2025, from https://www.geeksforgeeks.org/image-processing-in-java-read-and-write/  
  * 
- * Version/date: 5/26/25
+ * Version/date: 6/1/25
  * 
  * 
  */
@@ -33,8 +31,8 @@ import javax.swing.Timer;
  */
 public class DefenseStructure extends Structure implements Defense
 {
-	// A DefenseStrcutre HAS-A target area, HAs-Many tiles
-	private Queue<Tile> targetArea=  new LinkedList<Tile>();// Area when DefStructure can hit an enemy
+	// A DefenseStrcutre HAS-Many targetAreas
+	private Queue<Tile> targetAreas=  new LinkedList<Tile>();// Area when DefStructure can hit an enemy
 	
 	/**
 	 * 
@@ -93,16 +91,16 @@ public class DefenseStructure extends Structure implements Defense
 	 */
 	public void attack()
 	{
-		
-		for (Tile tile : targetArea)// traverse through the stack
+		boolean targetHit = false;
+		for (Tile tile : targetAreas)// traverse through the stack
 		{
-
-			if (tile.getEnemy() != null)
+			//if current tile doesn't have enemy and target hit is false
+			if ( (tile.getEnemy() != null) && (targetHit != true))
 			{
 				animate();
 				tile.getEnemy().damageEnemy(getDamage());
 				System.out.println("enemy dmg for: " + getDamage());
-				break; // stop attacking after first enemy hit
+				targetHit = true; // stop attacking after first enemy hit
 			}
 
 		}
@@ -123,15 +121,13 @@ public class DefenseStructure extends Structure implements Defense
 			for (int j = getCol() - getRange(); j <= getCol() + getRange(); j++)
 			{
 
-				// System.out.println("adding tile r: " + i + " c: " + j);
 				try
 				{
-					targetArea.add(getMap()[i][j]);
+					targetAreas.add(getMap()[i][j]);
 				}
 				catch (IndexOutOfBoundsException e)
 				{
-					// System.out.println("tile: " + i + ","+ j + "not added,
-					// OOBounds");
+					e.printStackTrace();
 				}
 
 			}
@@ -158,7 +154,6 @@ public class DefenseStructure extends Structure implements Defense
 	{
 		return getClass().getResource("/media/canon.png");
 	}
-
 
 
 	/**

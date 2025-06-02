@@ -13,13 +13,8 @@ import javax.swing.border.Border;
  * Lead Author(s): Claude-Arthur Dumesle
  * 
  * @author:  Claude-Arthur Dumesle
- * References:
- * Oracle. (2025a, April 5). Class Point. Point (java platform SE 8 ). https://docs.oracle.com/javase/8/docs/api/java/awt/Point.html 
- * Oracle. (2025, April 5). Class ThreadLocalRandom. Threadlocalrandom (java platform SE 8 ). https://docs.oracle.com/javase/8/docs//api/java/util/concurrent/ThreadLocalRandom.html
- *  *1. Agarwal, P. (2021, November 14). Image processing in java - read and write. GeeksforGeeks. GeeksforGeeks. 
- *Retrieved May 8, 2025, from https://www.geeksforgeeks.org/image-processing-in-java-read-and-write/  
  * 
- * Version/date: 5/26/25
+ * Version/date: 6/1/25
  * 
  * 
  */
@@ -34,7 +29,7 @@ import javax.swing.border.Border;
 public class Store extends JPanel
 {
 	private PlayerResource playerResource; // Store HAS-A player
-	private TowerDefenseModel model; // Store HAS-A model
+	private TowerDefenseModel gameModel; // Store HAS-A gameModel
 
 	/**
 	 * 
@@ -48,7 +43,7 @@ public class Store extends JPanel
 	{
 
 		playerResource = newPlayerResource; //pass a reference to player resouce
-		model = newModel; // pass a reference to moddel
+		gameModel = newModel; // pass a reference to gameModdel
 
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		setAlignmentY(FlowLayout.CENTER);
@@ -68,8 +63,8 @@ public class Store extends JPanel
 			{
 				if( playerResource.getWood() >= 10 ) //  check if player has resources needed
 				{
-					model.setPlacingStructure(new Canon());
-					model.togglePlacingMode(); // activates placing mode
+					gameModel.setPlacingStructure(new Canon());
+					gameModel.togglePlacingMode(); // activates placing mode
 					playerResource.takeWood(10);
 				}
 			}
@@ -85,8 +80,8 @@ public class Store extends JPanel
 			{
 				if( playerResource.getWood() >= 20 ) // check if [player has resources needed
 				{
-					model.setPlacingStructure(new ArcherTower());
-					model.togglePlacingMode(); // activates placing mode
+					gameModel.setPlacingStructure(new ArcherTower());
+					gameModel.togglePlacingMode(); // activates placing mode
 					playerResource.takeWood(20);
 				}
 			}
@@ -102,8 +97,8 @@ public class Store extends JPanel
 			{
 				if( playerResource.getWood() >= 25 )
 				{
-					model.setPlacingStructure(new LumberYard());
-					model.togglePlacingMode(); // activates placing mode
+					gameModel.setPlacingStructure(new LumberYard());
+					gameModel.togglePlacingMode(); // activates placing mode
 					playerResource.takeWood(25);
 				}
 			}
@@ -120,8 +115,8 @@ public class Store extends JPanel
 				
 				if( playerResource.getWood() >= 50 ) //check if player has recources needed
 				{
-					model.setPlacingStructure(new MineShaft());
-					model.togglePlacingMode(); // activates placing mode
+					gameModel.setPlacingStructure(new MineShaft());
+					gameModel.togglePlacingMode(); // activates placing mode
 					playerResource.takeWood(50);
 				}
 			}
